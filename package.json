@@ -1,0 +1,48 @@
+{
+  "name": "mobx-ssr",
+  "version": "0.0.1",
+  "description": "A library with tools/decorators for implementing the mobx root-store pattern over Server-side rendering (SSR). Prevents circular reference errors while serializing/deserializing your store classes between server and client. Can be used for any root-store pattern implementation, not only mobx.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "typescript",
+    "mobx",
+    "ssr",
+    "root-store",
+    "serializer",
+    "deserializer",
+    "class"
+  ],
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/iyobo/class-nodes"
+  },
+  "scripts": {
+    "test": "jest --config jestconfig.json",
+    "test:watch": "jest --config jestconfig.json --watch",
+    "build": "tsc",
+    "prepublish": "tsc && npm test",
+    "dev": "tsc -w",
+    "lint": "tslint -c tslint.json -p tsconfig.json"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "author": "Iyobo Eki",
+  "license": "MIT",
+  "dependencies": {
+    "class-transformer": "^0.2.3",
+    "lodash": "^4.17.14",
+    "reflect-metadata": "^0.1.13"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "@types/lodash": "^4.14.136",
+    "jest": "^24.8.0",
+    "supertest": "^4.0.2",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3"
+  }
+}
