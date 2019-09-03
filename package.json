@@ -1,10 +1,11 @@
 {
-  "name": "mobx-ssr",
+  "name": "uncircle",
   "version": "0.0.1",
-  "description": "A library with tools/decorators for implementing the mobx root-store pattern over Server-side rendering (SSR). Prevents circular reference errors while serializing/deserializing your store classes between server and client. Can be used for any root-store pattern implementation, not only mobx.",
+  "description": "A library with tools/decorators for preventing circular reference issues when serializing/deserializing classe objects that particularly implement the root-store pattern E,g Great for implementing a mobx root-store hydrated over SSR.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "keywords": [
+    "circular references",
     "typescript",
     "mobx",
     "ssr",
@@ -15,7 +16,7 @@
   ],
   "repository": {
     "type": "github",
-    "url": "https://github.com/iyobo/class-nodes"
+    "url": "https://github.com/iyobo/uncircle"
   },
   "scripts": {
     "test": "jest --config jestconfig.json",
