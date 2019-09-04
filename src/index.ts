@@ -43,6 +43,9 @@ export function DateField(target: any, propertyName: string) {
 
 export abstract class AbstractRootNode {
 
+    protected constructor() {
+        
+    }
     // @Deserializer
     /*
     Marks a class as a deserialization root class.
