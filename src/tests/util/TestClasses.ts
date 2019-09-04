@@ -1,7 +1,7 @@
-import {LeafClassNode, ParentClassNode} from '../../index';
+import {DateField, ParentField, RootNode} from '../../index';
 
 export class BadParentClass {
-    cow='moo';
+    cow = 'moo';
     childStore: BadLeafClass;
 
     constructor() {
@@ -9,33 +9,46 @@ export class BadParentClass {
     }
 }
 
-export class GoodParentClass extends ParentClassNode {
-    foo='bar';
-    childStore: GoodLeafClass;
-
-    constructor() {
-        super();
-        this.childStore = new GoodLeafClass(this);
-    }
-}
-
-
-export class BadLeafClass extends LeafClassNode {
+export class BadLeafClass {
     ab = 'wonton';
     cd = 'faro';
     parent: any;
+
     constructor(parentNode: any) {
-        super();
         this.parent = parentNode;
     }
 }
 
-export class GoodLeafClass extends LeafClassNode {
-    ab = 'wonton';
-    cd = 'faro';
-    parent: ParentClassNode;
-    constructor(parentNode: ParentClassNode) {
+// ---- good
+export class GoodParentClass extends RootNode {
+    foo = 'bar';
+    childStore: GoodChildClass;
+
+    constructor() {
         super();
+        this.childStore = new GoodChildClass(this);
+    }
+}
+
+export class GoodChildClass {
+    ab = 'wonton';
+    @DateField myDate = new Date(1000000);
+    @ParentField parent: GoodParentClass;
+
+    child: NestedLeafClass;
+
+    constructor(parentNode: GoodParentClass) {
+        this.parent = parentNode;
+        this.child = new NestedLeafClass(this);
+    }
+}
+
+export class NestedLeafClass {
+    mn = 'Fiery';
+    op = 'jutsu';
+    @ParentField parent: GoodChildClass;
+
+    constructor(parentNode: GoodChildClass) {
         this.parent = parentNode;
     }
 }

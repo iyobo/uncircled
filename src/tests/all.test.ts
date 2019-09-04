@@ -1,6 +1,6 @@
 import {BadParentClass, GoodParentClass} from './util/TestClasses';
 
-describe('Normal Root Node', () => {
+describe('Without uncircle', () => {
     it('when serializing, throws Circular structure error if not inheriting ParentClassNode', () => {
         try {
             const parent = new BadParentClass();
@@ -13,11 +13,34 @@ describe('Normal Root Node', () => {
     });
 });
 
-describe('ParentClassNode', () => {
-    it('serializes with leafNodes', () => {
-        const parent = new GoodParentClass();
-        const serializedClass = JSON.stringify(parent);
+describe('With Uncircle', () => {
+    it('serializes', () => {
 
-        expect(serializedClass).toBe('{"foo":"bar","childStore":"{\\"ab\\":\\"wonton\\",\\"cd\\":\\"faro\\"}"}');
+        const parent = new GoodParentClass();
+        const serializedClass = JSON.stringify(parent).replace(/\\/g, '');
+
+        expect(serializedClass).toEqual(`{"foo":"bar","childStore":"{"ab":"wonton","myDate":"1970-01-01T00:16:40.000Z","child":"{"mn":"Fiery","op":"jutsu"}"}"}`);
+    });
+
+    it('deserializes JSON String', () => {
+        const parent: GoodParentClass = new GoodParentClass();
+
+        parent.deserialize(`{"foo":"wopo"}`);
+
+        expect(parent.foo).toBe('wopo');
+    });
+    it('deserializes JSON object', () => {
+        const parent: GoodParentClass = new GoodParentClass();
+
+        parent.deserialize({
+            foo: 'wopo',
+            childStore: {
+                ab: 'why'
+            }
+        });
+
+        expect(parent.foo).toBe('wopo');
+        expect(parent.childStore.ab).toBe('why');
     });
 });
+
