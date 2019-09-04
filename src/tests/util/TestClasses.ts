@@ -1,4 +1,4 @@
-import {DateField, ParentField, RootNode} from '../../index';
+import {DateField, ParentField, AbstractRootNode} from '../../index';
 
 export class BadParentClass {
     cow = 'moo';
@@ -20,7 +20,7 @@ export class BadLeafClass {
 }
 
 // ---- good
-export class GoodParentClass extends RootNode {
+export class GoodParentClass extends AbstractRootNode {
     foo = 'bar';
     childStore: GoodChildClass;
 

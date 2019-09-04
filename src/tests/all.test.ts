@@ -1,6 +1,6 @@
 import {BadParentClass, GoodParentClass} from './util/TestClasses';
 
-describe('Without uncircle', () => {
+describe('Without uncircled', () => {
     it('when serializing, throws Circular structure error if not inheriting ParentClassNode', () => {
         try {
             const parent = new BadParentClass();
@@ -30,6 +30,13 @@ describe('With Uncircle', () => {
         expect(parent.foo).toBe('wopo');
     });
     it('deserializes JSON object', () => {
+        const parent: GoodParentClass = new GoodParentClass();
+
+        parent.deserialize({foo: 'wopo'});
+
+        expect(parent.foo).toBe('wopo');
+    });
+    it('deserializes JSON deep', () => {
         const parent: GoodParentClass = new GoodParentClass();
 
         parent.deserialize({

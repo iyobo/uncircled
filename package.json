@@ -1,6 +1,6 @@
 {
-  "name": "uncircle",
-  "version": "0.0.1",
+  "name": "uncircled",
+  "version": "1.0.0",
   "description": "A library with tools/decorators for preventing circular reference issues when serializing/deserializing classe objects that particularly implement the root-store pattern E,g Great for implementing a mobx root-store hydrated over SSR.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "github",
-    "url": "https://github.com/iyobo/uncircle"
+    "url": "https://github.com/iyobo/uncircled"
   },
   "scripts": {
     "test": "jest --config jestconfig.json",

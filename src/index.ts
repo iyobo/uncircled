@@ -41,7 +41,7 @@ export function DateField(target: any, propertyName: string) {
 
 
 
-export abstract class RootNode {
+export abstract class AbstractRootNode {
 
     // @Deserializer
     /*
