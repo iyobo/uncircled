@@ -22,13 +22,6 @@ describe('With Uncircle', () => {
         expect(serializedClass).toEqual(`{"foo":"bar","childStore":"{"ab":"wonton","myDate":"1970-01-01T00:16:40.000Z","child":"{"mn":"Fiery","op":"jutsu"}"}"}`);
     });
 
-    it('deserializes JSON String', () => {
-        const parent: GoodParentClass = new GoodParentClass();
-
-        parent.deserialize(`{"foo":"wopo"}`);
-
-        expect(parent.foo).toBe('wopo');
-    });
     it('deserializes JSON object', () => {
         const parent: GoodParentClass = new GoodParentClass();
 
@@ -36,7 +29,14 @@ describe('With Uncircle', () => {
 
         expect(parent.foo).toBe('wopo');
     });
-    it('deserializes JSON deep', () => {
+    it('deserializes JSON String', () => {
+        const parent: GoodParentClass = new GoodParentClass();
+
+        parent.deserialize(`{"foo":"wopo"}`);
+
+        expect(parent.foo).toBe('wopo');
+    });
+    it('deserializes JSON nested Object', () => {
         const parent: GoodParentClass = new GoodParentClass();
 
         parent.deserialize({
@@ -45,6 +45,19 @@ describe('With Uncircle', () => {
                 ab: 'why'
             }
         });
+
+        expect(parent.foo).toBe('wopo');
+        expect(parent.childStore.ab).toBe('why');
+    });
+    it('deserializes JSON nested string', () => {
+        const parent: GoodParentClass = new GoodParentClass();
+
+        parent.deserialize(`{
+            "foo": "wopo",
+            "childStore": {
+                "ab": "why"
+            }
+        }`);
 
         expect(parent.foo).toBe('wopo');
         expect(parent.childStore.ab).toBe('why');
