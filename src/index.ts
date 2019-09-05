@@ -22,8 +22,6 @@ function deserialize(rawObject: string | any) {
         rawObject = JSON.parse(rawObject);
     }
 
-    console.log('deserialize',this, rawObject);
-
     const keys = Object.keys(rawObject);
 
     for (const key of keys) {
