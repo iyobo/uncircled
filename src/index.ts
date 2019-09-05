@@ -35,50 +35,38 @@ export function DateField(target: any, propertyName: string) {
     classDef.prototype._$$uncircleDateFields[propertyName] = 1;
 
     // overwrite toJSON
-    classDef.prototype.toJSON = toJSON.bind(classDef);
+    classDef.prototype.toJSON = toJSON;
 }
 
+function deserialize(rawObject: string | any) {
 
-
-
-export class AbstractRootNode {
-
-    constructor() {
-        
+    if(typeof rawObject=== 'string') {
+        rawObject = JSON.parse(rawObject);
     }
-    // @Deserializer
-    /*
-    Marks a class as a deserialization root class.
-    This adds a prototype function (ucDeserialize) that objectifies and marshals the giving json string through out the root class and its nested stores..
-    You can have multiple @Deserializer within a tree of classes.
 
-    If using this with mobx strict mode, and you are deserializing observables, I reccomend you create a different function that wraps ucDeserialize in an @action.
-    */
-    deserialize(rawObject: string | any) {
-        
-        if(typeof rawObject=== 'string') {
-            rawObject = JSON.parse(rawObject);
-        }
+    const keys = Object.keys(rawObject);
 
-        const keys = Object.keys(rawObject);
+    for (const key of keys) {
+        const dateFields = this['_$$uncircleDateFields'] || {};
+        const field = rawObject[key];
 
-        for (const key of keys) {
-            const dateFields = this['_$$uncircleDateFields'] || {};
-            const field = rawObject[key];
-
-            if (field ) {
-                if( dateFields[key]) {
-                    this[key] = new Date(field);
-                }
-                else if(typeof field == 'function' || typeof field == 'object') {
-                    this.deserialize.bind(this[key], field)();
-                }
-                else {
-                    this[key] = field;
-                }
+        if (field ) {
+            if( dateFields[key]) {
+                this[key] = new Date(field);
+            }
+            else if(typeof field == 'function' || typeof field == 'object') {
+                deserialize.bind(this[key])(field);
+            }
+            else {
+                this[key] = field;
             }
         }
     }
 }
 
+export function Deserializer(classDef: Function) {
+
+    // add deserialize function to prototype
+    classDef.prototype.deserialize = deserialize;
+}
 

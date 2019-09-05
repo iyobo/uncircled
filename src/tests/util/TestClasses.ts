@@ -1,4 +1,4 @@
-import {DateField, ParentField, AbstractRootNode} from '../../index';
+import {DateField, ParentField, Deserializer} from '../../index';
 
 export class BadParentClass {
     cow = 'moo';
@@ -20,12 +20,12 @@ export class BadLeafClass {
 }
 
 // ---- good
-export class GoodParentClass extends AbstractRootNode {
+@Deserializer
+export class GoodParentClass {
     foo = 'bar';
     childStore: GoodChildClass;
 
     constructor() {
-        super();
         this.childStore = new GoodChildClass(this);
     }
 }
