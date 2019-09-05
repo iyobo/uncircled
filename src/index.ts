@@ -27,7 +27,7 @@ function deserialize(rawObject: string | any) {
     const keys = Object.keys(rawObject);
 
     for (const key of keys) {
-        const dateFields = this['_$$uncircleDateFields'] || {};
+        const dateFields = this._$$uncircleDateFields || {};
         const field = rawObject[key];
 
         if (field ) {
