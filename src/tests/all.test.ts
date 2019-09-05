@@ -1,4 +1,4 @@
-import {BadParentClass, GoodParentClass} from './util/TestClasses';
+import {BadParentClass, GoodParentClass, SoloClass} from './util/TestClasses';
 
 describe('Without uncircled', () => {
     it('when serializing, throws Circular structure error if not inheriting ParentClassNode', () => {
@@ -72,6 +72,21 @@ describe('With Uncircle', () => {
 
         expect(parent.foo).toBe('super');
         expect(parent.childStore.ab).toBe('duper');
+    });
+
+    it('can deserialize serialize output for solo class', () => {
+        const solo: SoloClass = new SoloClass();
+        solo.spider = 'girl';
+        solo.justiceLeague.spiderMan = true;
+        const serializedTree = JSON.stringify(solo);
+
+        const newSolo = new SoloClass();
+        expect(newSolo.spider).toBe('man');
+
+        newSolo.deserialize(serializedTree);
+
+        expect(newSolo.spider).toBe('girl');
+        expect(newSolo.justiceLeague.spiderMan).toBe(true);
     });
 });
 

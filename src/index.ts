@@ -22,22 +22,22 @@ function deserialize(rawObject: string | any) {
         rawObject = JSON.parse(rawObject);
     }
 
-    // console.log('deserilize',this, rawObject);
+    console.log('deserialize',this, rawObject);
 
     const keys = Object.keys(rawObject);
 
     for (const key of keys) {
-        const dateFields = this._$$uncircleDateFields || {};
+        const dateFields = this['_$$uncircleDateFields'] || {};
         const field = rawObject[key];
 
         if (field ) {
             if( dateFields[key]) {
                 this[key] = new Date(field);
             }
-            else if(typeof field == 'function' || typeof field == 'object') {
+            else if( typeof field == 'object' && field.constructor && field.constructor.name !== 'Object') { // raw object, not a class instance
                 deserialize.bind(this[key])(field);
             }
-            else {
+            else if(typeof field !== 'function') {
                 this[key] = field;
             }
         }

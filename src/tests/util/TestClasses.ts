@@ -55,3 +55,16 @@ export class NestedLeafClass {
         this.parent = parentNode;
     }
 }
+
+@Deserializer
+export class SoloClass {
+    spider = 'man';
+    wonder = 'woman';
+
+    justiceLeague = {
+        superMan: true,
+        spiderMan: false
+    };
+
+    deserialize(raw) {}
+}
