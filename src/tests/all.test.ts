@@ -19,7 +19,7 @@ describe('With Uncircle', () => {
         const parent = new GoodParentClass();
         const serializedClass = JSON.stringify(parent).replace(/\\/g, '');
 
-        expect(serializedClass).toEqual(`{"foo":"bar","childStore":"{"ab":"wonton","myDate":"1970-01-01T00:16:40.000Z","child":"{"mn":"Fiery","op":"jutsu"}"}"}`);
+        expect(serializedClass).toEqual('{"foo":"bar","childStore":{"ab":"wonton","myDate":"1970-01-01T00:16:40.000Z","child":{"mn":"Fiery","op":"jutsu"}}}');
     });
 
     it('deserializes JSON object', () => {
