@@ -1,6 +1,6 @@
 {
   "name": "uncircled",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A library with tools/decorators for preventing circular reference issues when serializing/deserializing classe objects that particularly implement the root-store pattern E,g Great for implementing a mobx root-store hydrated over SSR.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
