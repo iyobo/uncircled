@@ -44,6 +44,12 @@ class RootStore {
         super();
         this.childStore = new ChildStore(this);
     }
+
+    // For typescript's sake, define an empty deserialize function so it knows 
+    // that this function that is injected by @Deserializer exists. Future versions of Typescript will allow for smarter
+    // detection of decorator injections. Or you can leave this out and simply @ts-suppress each ts warning about store.deserialize not existing.
+    deserialize(rawObject: string | any) {
+    }
 }
 
 // The following classes need not be in the same file. You can export them into your root class.

@@ -28,6 +28,9 @@ export class GoodParentClass {
     constructor() {
         this.childStore = new GoodChildClass(this);
     }
+
+    deserialize(rawObject: string | any) {
+    }
 }
 
 export class GoodChildClass {
