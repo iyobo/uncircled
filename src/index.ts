@@ -10,10 +10,40 @@ function toJSON() {
         }
     }
 
-    let str = JSON.stringify(obj);
-    str = str.replace(/\\/g, '');
-    return str;
+    // let str = JSON.stringify(obj);
+    // str = str.replace(/\\/g, '');
+    return obj;
 }
+
+
+function deserialize(rawObject: string | any) {
+
+    if(typeof rawObject=== 'string') {
+        rawObject = JSON.parse(rawObject);
+    }
+
+    // console.log('deserilize',this, rawObject);
+
+    const keys = Object.keys(rawObject);
+
+    for (const key of keys) {
+        const dateFields = this['_$$uncircleDateFields'] || {};
+        const field = rawObject[key];
+
+        if (field ) {
+            if( dateFields[key]) {
+                this[key] = new Date(field);
+            }
+            else if(typeof field == 'function' || typeof field == 'object') {
+                deserialize.bind(this[key])(field);
+            }
+            else {
+                this[key] = field;
+            }
+        }
+    }
+}
+
 
 // @ParentField
 /*
@@ -36,34 +66,6 @@ export function DateField(target: any, propertyName: string) {
 
     // overwrite toJSON
     classDef.prototype.toJSON = toJSON;
-}
-
-function deserialize(rawObject: string | any) {
-
-    if(typeof rawObject=== 'string') {
-        rawObject = JSON.parse(rawObject);
-    }
-
-    console.log('deserilize',this, rawObject);
-
-    const keys = Object.keys(rawObject);
-
-    for (const key of keys) {
-        const dateFields = this['_$$uncircleDateFields'] || {};
-        const field = rawObject[key];
-
-        if (field ) {
-            if( dateFields[key]) {
-                this[key] = new Date(field);
-            }
-            else if(typeof field == 'function' || typeof field == 'object') {
-                deserialize.bind(this[key])(field);
-            }
-            else {
-                this[key] = field;
-            }
-        }
-    }
 }
 
 export function Deserializer(classDef: Function) {

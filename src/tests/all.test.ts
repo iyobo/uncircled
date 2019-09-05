@@ -62,5 +62,16 @@ describe('With Uncircle', () => {
         expect(parent.foo).toBe('wopo');
         expect(parent.childStore.ab).toBe('why');
     });
+    it('can deserialize serialize output', () => {
+        const parent: GoodParentClass = new GoodParentClass();
+        parent.foo = 'super';
+        parent.childStore.ab = 'duper';
+        const serializedTree = JSON.stringify(parent);
+
+        parent.deserialize(serializedTree);
+
+        expect(parent.foo).toBe('super');
+        expect(parent.childStore.ab).toBe('duper');
+    });
 });
 
