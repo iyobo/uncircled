@@ -32,7 +32,7 @@ Uncircled exports 3 Decorators:
 ## How to Use
 
 Consider these classes...
-```$xslt
+```$typescript
 import {DateField, ParentField, Deserializer} from 'uncircled';
 
 @Deserializer
@@ -90,7 +90,7 @@ javascript to automatically serialize any object or to stringify whwnever you ca
 
 We can take our entire store tree implementation from the root and serialize it for transmission i.e turn to string. 
 If you were using this with mobx and SSR, you would do this server side 
-```$xslt
+```$typescript
 const str = JSON.stringify(store);
 ```
 `str` is now the string representation of your entire store tree.
@@ -103,7 +103,7 @@ It can accept a json string or a fully json parsed javascript object. Either wor
 Assuming you have passed in that `str` from the server to the client, you can do this client-side to hydrate the 
 contents of the store.
 
-```$xslt
+```$typescript
 store.deserialize(strFromServer);
 ```
 
