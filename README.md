@@ -52,7 +52,7 @@ class RootStore {
     }
 }
 
-// The following classes need not be in the same file. You can export them into your root class.
+// The following classes need not be in the same file.
 
 class ChildStore {
     ab = 'wonton';
@@ -82,7 +82,7 @@ const store = new RootStore();
 ```
 
 The Root-store pattern is a declarative tree of classes that each know their parents, contents and children.
-This is the reccomended way of using some state management libraries like MOBX.
+
 
 ### Serializing
 Any of the field decorators you use in a class, injects that class with a special `toJSON()` function that eliminates circulars (assuming you used the proper field decorators) which is used by 
